@@ -86,8 +86,7 @@ npm run dev
 │   │   ├── register.js       // No: #2 /register
 │   │   └── tokenRefresh.js   // No: #3 /token 
 │   ├── public
-│   │   ├── index.html        // Mini User Interface built with vue
-│   │   └── docs.html         // This README file as html
+│   │   └── index.html        // Mini User Interface built with vue
 │   ├── authRouter.js         // All routings 
 │   ├── middleware.js         // Authorize user with access token in header
 │   ├── mongo.js              // Initialize MongoDB connection
