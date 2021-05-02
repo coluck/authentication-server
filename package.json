@@ -1,6 +1,6 @@
 {
   "name": "authentication-server1",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "A node app that handles user registration, authentication & authorization with JWT",
   "main": "index.js",
   "scripts": {
