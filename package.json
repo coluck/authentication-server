@@ -1,0 +1,42 @@
+{
+  "name": "authentication-server",
+  "version": "1.0.0",
+  "description": "A node app that handles user registration, authentication & authorization with JWT",
+  "main": "index.js",
+  "scripts": {
+    "dev": "nodemon server.js",
+    "start": "node server.js",
+    "secret": "node -e console.log(require('crypto').randomBytes(64).toString('hex'))",
+    "dbtest": "node test/mongoConnection.js"
+  },
+  "keywords": [
+    "authentication",
+    "express",
+    "auth",
+    "mongodb",
+    "jwt",
+    "joi",
+    "mongoose",
+    "bcrypt"
+  ],
+  "author": "Oguz Colak <oguzcoluck@gmail.com>",
+  "license": "MIT",
+  "dependencies": {
+    "bcryptjs": "^2.4.3",
+    "cors": "^2.8.5",
+    "dotenv": "^8.2.0",
+    "express": "^4.17.1",
+    "helmet": "^4.5.0",
+    "joi": "^17.4.0",
+    "jsonwebtoken": "^8.5.1",
+    "mongoose": "^5.12.6",
+    "morgan": "^1.10.0"
+  },
+  "devDependencies": {
+    "eslint": "^7.25.0",
+    "eslint-config-prettier": "^8.3.0",
+    "eslint-plugin-prettier": "^3.4.0",
+    "nodemon": "^2.0.7",
+    "prettier": "^2.2.1"
+  }
+}

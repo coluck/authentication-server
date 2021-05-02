@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>authentication-sever | User Interface</title>
+
+  <link rel="stylesheet" href="https://unpkg.com/mvp.css">
+  <script src="https://cdn.jsdelivr.net/npm/vue@2"></script>
+  <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+</head>
+<style>
+  input {
+    width: 90%;
+  }
+</style>
+
+<body>
+  <div id="app">
+    <header style="margin-top: 50px">
+      <h1>authentication-sever</h1>
+      <a href="https://github.com/coluck/authentication-sever">github</a> -
+      <a href="/docs.html">docs</a>
+    </header>
+    <section>
+      <form v-if="!loggedIn" @submit.prevent style="min-width: 350px">
+        <p style="height: 10px; color: red;">{{error}}</p>
+        <label>Username:</label>
+        <input v-model="username" type="text" autocomplete="off" placeholder="JohnDoe">
+        <label>Email:</label>
+        <input v-model="email" type="text" autocomplete="off" placeholder="example@mail.com">
+        <label>Password:</label>
+        <input v-model="password" type="password" name="password" size="30" placeholder="******">
+        <section>
+          <button @click="login">login</button>&nbsp;&nbsp;
+          <button @click="register">register</button>
+        </section>
+      </form>
+      <form v-else @submit.prevent="" style="max-width: 500px; text-align: center;">
+        <button @click="logout">logout</button>
+        <button @click="refresh">refresh token</button><br />
+        Access & Refresh tokens are here.<br />
+        <a href="https://jwt.io/#debugger-io" target="_blank">Paste tokens here to reveal payload.</a>
+        <div style="word-break: break-all">
+          <b>access token:</b>
+          <pre><samp>{{ accessToken }}</samp></pre>
+          <b>refresh token:</b>
+          <pre><samp>{{ refreshToken }}</samp></pre>
+        </div>
+      </form>
+    </section>
+  </div>
+
+  <script>
+    var app = new Vue({
+      el: "#app",
+      data: {
+        loggedIn: false,
+        username: "",
+        email: "",
+        password: "",
+        error: "",
+        accessToken: "",
+        refreshToken: "",
+      },
+      created() {
+        let accessToken = localStorage.getItem("access_token");
+        let refreshToken = localStorage.getItem("refresh_token");
+        if (accessToken || refreshToken) {
+          this.accessToken = accessToken;
+          this.refreshToken = refreshToken;
+          this.loggedIn = true;
+        }
+      },
+      methods: {
+        register() {
+          this.error = "";
+          if (!(this.username && this.email && this.password))
+            return this.error = "username, email and password is required for register";
+          axios.post("/register", {
+            username: this.username,
+            email: this.email,
+            password: this.password
+          }).then((res) => {
+            this.login();
+          }).catch((err) => {
+            this.error = err.response.data;
+          });
+        },
+        login() {
+          this.error = "";
+          if (!(this.email && this.password))
+            return this.error = "username, email and password is required for login";
+          axios.post("/login", {
+            email: this.email,
+            password: this.password
+          }).then((res) => {
+            this.loggedIn = true;
+            this.accessToken = res.data.access_token;
+            this.refreshToken = res.data.refresh_token;
+            localStorage.setItem("access_token", this.accessToken);
+            localStorage.setItem("refresh_token", this.refreshToken);
+          }).catch((err) => {
+            this.error = err.response.data;
+          });
+        },
+        refresh() {
+          axios.post("/token", {
+            refresh_token: this.refreshToken,
+          }).then((res) => {
+            this.accessToken = res.data.access_token;
+            alert("Access Token refreshed");
+            localStorage.setItem("access_token", this.accessToken);
+          }).catch((err) => {
+            this.error = err.response.data;
+          });
+        },
+        logout() {
+          localStorage.clear();
+          this.loggedIn = false;
+          this.accessToken = "";
+          this.refreshToken = "";
+        }
+      }
+    });
+  </script>
+</body>
+
+</html>
