@@ -1,5 +1,5 @@
 {
-  "name": "authentication-server",
+  "name": "authentication-server1",
   "version": "1.0.0",
   "description": "A node app that handles user registration, authentication & authorization with JWT",
   "main": "index.js",
@@ -38,5 +38,9 @@
     "eslint-plugin-prettier": "^3.4.0",
     "nodemon": "^2.0.7",
     "prettier": "^2.2.1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/coluck/authentication-server.git"
   }
 }
