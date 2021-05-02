@@ -1,7 +1,9 @@
 # Authentication Server
 
 The authentication-server is a node app that handles user registration, authentication & authorization with [JWT](https://jwt.io/introduction).
+
 Here is the [REPO](https://github.com/coluck/authentication-server).
+
 Here is the [DEMO](https://auth-serv.herokuapp.com/).
 
 ### How it works?
