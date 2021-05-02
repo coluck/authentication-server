@@ -104,6 +104,8 @@ npm run dev
 ### User Interface
 Mini user interface is build with vue.js to show up what is going on.
 Available on root "/". It can be removed from server.js file.
+![Screenshot_2021-05-02 authentication-sever User Interface](https://user-images.githubusercontent.com/39749730/116825809-808cf700-ab99-11eb-8b30-98a5cfbc8f3e.png)
+![Screenshot_2021-05-02 authentication-sever User Interface(1)](https://user-images.githubusercontent.com/39749730/116825812-8256ba80-ab99-11eb-9e98-9f9741344224.png)
 
 ### User Model
 User Model is created with [mongoose](https://www.npmjs.com/package/mongoose) in userModel.js.
